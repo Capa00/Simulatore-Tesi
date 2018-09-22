@@ -1,0 +1,5 @@
+TODO list:
+- handler NodoMobile:
+	------ gli eventi di init sono a priorità altae quindi risponde senza handler
+	* risponde all'update position (tramite mobility handler)
+	* risponde all'evento nuovo veicolo (aggiunge al grafo)
