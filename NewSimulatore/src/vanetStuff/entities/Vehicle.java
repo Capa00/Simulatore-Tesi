@@ -6,13 +6,14 @@ import simulatorVanet.VanetSimulation;
 import simulatorVanet.history.SpriteData;
 import simulatorVanet.history.SpriteData.SpriteDataCar;
 import util.RoadPath;
+import vanetStuff.events.EventName;
 import vanetStuff.mobilities.CarMobilityHandler;
 import vanetStuff.mobilities.MobilityHandler;
 import vanetStuff.roadNetworks.Intersection;
 import vanetStuff.roadNetworks.Road;
 import vanetStuff.roadNetworks.RoadNetwork;
 
-public class Car extends MobileNode {
+public class Vehicle extends MobileNode {
 	private boolean onTheRoad = false;
 	private Intersection start, target; //nodo di partenza e di arrivo
 	private RoadNetwork grafo; //rete stradale
@@ -25,7 +26,7 @@ public class Car extends MobileNode {
 	private RoadPath currentPath; //strade completamente percorse fino a questo momento
 	
 	
-	public Car(VanetSimulation simulation, String id) {
+	public Vehicle(VanetSimulation simulation, String id) {
 		super("vehicle", simulation,id);
 		grafo = simulation.getScenario().getRoadNetwork();
 		
@@ -73,19 +74,24 @@ public class Car extends MobileNode {
 	 * @see simulator.Entity#getEventHandler()
 	 */
 	@Override
-	public EventHandler<Car> getEventHandler() {
+	public EventHandler<Vehicle> getEventHandler() {
 		return new CarEventHandler();
 	}
 
-	private class CarEventHandler extends MobileNodeEventHandler<Car> {
+	private class CarEventHandler extends MobileNodeEventHandler<Vehicle> {
 		@Override
-		public void handle(Car car, Event event) {
+		public void handle(Vehicle car, Event event) {
 			/*debug*/
 			System.out.println("Car.CarEventHandler.handle():");
 			System.out.println("\trichiamo l'handle del nodo Mobile");
 			/**/
-
-			super.handle(car,event);
+			
+			switch(event.getName()) {
+			case EventName.UPDATE_POSITION:
+				break;
+			
+			default : super.handle(car,event);
+			}
 			//gestisce updateposition
 		}
 	}

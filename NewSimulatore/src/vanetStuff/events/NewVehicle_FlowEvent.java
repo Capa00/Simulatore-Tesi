@@ -3,7 +3,7 @@ package vanetStuff.events;
 import simulator.Event;
 import simulatorVanet.VanetSimulation;
 import vanetStuff.VehicularFlow;
-import vanetStuff.entities.Car;
+import vanetStuff.entities.Vehicle;
 
 public class NewVehicle_FlowEvent extends Event {
 	private VehicularFlow flow;
@@ -22,7 +22,7 @@ public class NewVehicle_FlowEvent extends Event {
 		System.out.println("NewVehicle_FlowEvent.action():");
 		/**/
 
-		Car v = new Car(simulation, flow.getId()+"["+veicoliCreati+"]");
+		Vehicle v = new Vehicle(simulation, flow.getId()+"["+veicoliCreati+"]");
 		
 		v.setStartPoint(flow.getStartingPoint());
 		v.setTargetPoint(flow.getTargetPoint());
