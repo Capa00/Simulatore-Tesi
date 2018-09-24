@@ -1,10 +1,11 @@
 package vanetStuff.entities;
 
+import simulator.Event;
+import simulator.EventHandler;
 import simulatorVanet.VanetSimulation;
 import simulatorVanet.history.SpriteData;
 import simulatorVanet.history.SpriteData.SpriteDataCar;
 import util.RoadPath;
-import vanetStuff.events.EventManager;
 import vanetStuff.mobilities.CarMobilityHandler;
 import vanetStuff.mobilities.MobilityHandler;
 import vanetStuff.roadNetworks.Intersection;
@@ -72,11 +73,22 @@ public class Car extends MobileNode {
 	 * @see simulator.Entity#getEventHandler()
 	 */
 	@Override
-	public EventManager getEventHandler() {
-		return null;
+	public EventHandler<Car> getEventHandler() {
+		return new CarEventHandler();
 	}
 
+	private class CarEventHandler extends MobileNodeEventHandler<Car> {
+		@Override
+		public void handle(Car car, Event event) {
+			/*debug*/
+			System.out.println("Car.CarEventHandler.handle():");
+			System.out.println("\trichiamo l'handle del nodo Mobile");
+			/**/
 
+			super.handle(car,event);
+			//gestisce updateposition
+		}
+	}
 
 
 

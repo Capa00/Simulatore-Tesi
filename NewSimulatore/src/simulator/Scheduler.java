@@ -19,7 +19,6 @@ public class Scheduler {
 	
 	private PriorityQueue<Event> queue = new PriorityQueue<>();
 	private LinkedList<Event> story = new LinkedList<>();
-		
 	
 	
 	// COSTR //////////////////////////////////////////

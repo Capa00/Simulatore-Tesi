@@ -2,23 +2,23 @@ package vanetStuff.entities;
 
 import simulator.Entity;
 import simulator.Event;
+import simulator.EventHandler;
 import simulatorVanet.VanetSimulation;
 import simulatorVanet.history.SpriteData;
-import vanetStuff.events.Events;
+import vanetStuff.events.EventName;
 import vanetStuff.mobilities.MobilityHandler;
 import vanetStuff.roadNetworks.RoadNetwork;
 
 public abstract class MobileNode extends Entity{
 	public final String clazz;
 	private String id;
-	private VanetSimulation simulation;
 	private double x,y;
 	
 	
 	// COSTR /////////////////////
 	
 	public MobileNode(String clazz, VanetSimulation simulation, String id) {
-		super(simulation.getScheduler());
+		super(simulation);
 		this.simulation = simulation; 
 		this.id = id; 
 		this.clazz = clazz;
@@ -36,6 +36,7 @@ public abstract class MobileNode extends Entity{
 	public String getId() { return id; }
 	public double getX() { return x; }
 	public double getY() { return y;}
+	public VanetSimulation getSimulation() {return (VanetSimulation)simulation;}
 	
 	
 	// METHODS //////////////////
@@ -45,15 +46,11 @@ public abstract class MobileNode extends Entity{
 	}
 
 	public void handle(Event event) {
-		switch(event.getName()) {
-		case Events.NEW_MOBILE_NODE: 
-			/*1*///aggiunge nodo mobile alla strada
-			RoadNetwork graph = simulation.getScenario().getRoadNetwork();
-			graph.addMobileNode(this);
-			break;
-		}
-		//qui si fa l'update position TODO
-		//handler.handle(event);
+		/*debug*/
+		System.out.println("MobileNode.handle(): "+this);
+		/**/
+		simulation.getEventManager().handle(this, event);
+
 	}
 	
 	// ABSTRACT //////////////////
@@ -61,4 +58,33 @@ public abstract class MobileNode extends Entity{
 	//restituisce l'oggetto che gestisce la sua mobilità
 	public abstract MobilityHandler getMobilityHandler();
 	
+	
+	protected abstract static class MobileNodeEventHandler<T extends MobileNode> implements EventHandler<T> {
+
+		/* (non-Javadoc)
+		 * @see vanetStuff.EventHandler#handle(simulator.Event)
+		 */
+		@Override
+		public void handle(T mobileNode, Event event) {
+			/*debug*/
+			System.out.println("MobileNode.MobileNodeEventHandler.handle(): "+event.getName());
+			/**/
+
+			switch(event.getName()) {
+			
+			case EventName.NEW_MOBILE_NODE:
+				/*1*///aggiunge nodo mobile alla strada
+				RoadNetwork graph = mobileNode.getSimulation().getScenario().getRoadNetwork();
+				graph.addMobileNode(mobileNode);
+				
+				/*debug*/
+				System.out.println("\taggiunto nodo mobile "+mobileNode+" id="+mobileNode.getId()+" al grafo");
+				/**/
+
+				break;
+			}
+			
+		}
+		
+	}
 }

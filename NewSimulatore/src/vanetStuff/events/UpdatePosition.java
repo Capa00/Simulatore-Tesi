@@ -15,7 +15,7 @@ public class UpdatePosition extends Event {
 	
 	public UpdatePosition(VanetSimulation vanetSimulation, HistoryRecorder historyRecorder, double time) {
 		
-		super(Events.UPDATE_POSITION, time);
+		super(EventName.UPDATE_POSITION, time);
 		this.historyRecorder = historyRecorder;
 		
 		this.roadNetwork = vanetSimulation.getScenario().getRoadNetwork();
@@ -32,12 +32,14 @@ public class UpdatePosition extends Event {
 		for(MobileNode m : roadNetwork.getMobilenodes()) {
 			idEntity = m.getId();
 			
-			System.out.println("update "+idEntity);
-			
+			/*debug*
+			System.out.println("UpdatePosition.action(): update "+m);
+			/**/
+
 			//storia veicolo
-			spriteData = m.getSpriteData();
-			spriteData.setTime(scheduler.getCurrentTime());
-			historyRecorder.updatePosition(idEntity, spriteData);
+//			spriteData = m.getSpriteData();
+//			spriteData.setTime(scheduler.getCurrentTime());
+//			historyRecorder.updatePosition(idEntity, spriteData);
 			////////////////
 			
 			

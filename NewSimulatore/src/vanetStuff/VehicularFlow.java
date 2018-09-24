@@ -1,8 +1,8 @@
 package vanetStuff;
 
 import simulator.Entity;
+import simulator.EventHandler;
 import simulatorVanet.VanetSimulation;
-import vanetStuff.events.EventManager;
 import vanetStuff.roadNetworks.Intersection;
 
 public class VehicularFlow extends Entity{
@@ -12,13 +12,13 @@ public class VehicularFlow extends Entity{
 	private int numeroVeicoli;
 
 	public VehicularFlow(VanetSimulation simulation, double startTime, double generationVehiclePeriod, Intersection startingPoint, Intersection targetPoint, int vehicleNumber) {
-		super(simulation.getScheduler());
+		super(simulation);
 		this.tempoInizio = startTime;
 		this.periodoGenerazioneVeicoli = generationVehiclePeriod;
 		nodoInizio = startingPoint;
 		nodoFine = targetPoint;
 		numeroVeicoli = vehicleNumber;
-		id = "("+startingPoint.getId()+") - ("+targetPoint.getId()+")";
+		id = "("+startingPoint.getId()+")-("+targetPoint.getId()+")";
 	}
 	
 	
@@ -41,8 +41,7 @@ public class VehicularFlow extends Entity{
 	 * @see simulator.Entity#getEventHandler()
 	 */
 	@Override
-	public EventManager getEventHandler() {
-		// TODO Auto-generated method stub
+	public EventHandler<VehicularFlow> getEventHandler() {
 		return null;
 	}
 

@@ -11,7 +11,7 @@ public class NewVehicle_FlowEvent extends Event {
 	private VanetSimulation simulation;
 	
 	public NewVehicle_FlowEvent(VanetSimulation vanetSimulation, double amongManyMillisec, VehicularFlow flow) {
-		super(Events.NEW_FLOW_VEHICLE, amongManyMillisec);
+		super(EventName.NEW_FLOW_VEHICLE, amongManyMillisec);
 		this.flow = flow;
 		simulation = vanetSimulation;
 	}
@@ -20,7 +20,6 @@ public class NewVehicle_FlowEvent extends Event {
 	public void action() {
 		/*debug*/
 		System.out.println("NewVehicle_FlowEvent.action():");
-		System.out.println("\tnew flow action ");
 		/**/
 
 		Car v = new Car(simulation, flow.getId()+"["+veicoliCreati+"]");
@@ -31,7 +30,10 @@ public class NewVehicle_FlowEvent extends Event {
 		flow.sendEvent(new NewMobileNodeEvent(0, v));
 		
 		if(++veicoliCreati == flow.getVehicleNumber())return;
-		
+		/*debug*/
+		System.out.println("\tho creato il veicolo "+v+", invio l'evento");
+		/**/
+
 		flow.sendEvent(this);
 	}
 
