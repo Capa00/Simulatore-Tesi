@@ -12,6 +12,7 @@ import vanetStuff.mobilities.MobilityHandler;
 /**Drone.java
  * 
  */
+@Deprecated
 public class Drone extends MobileNode{
 
 	/**

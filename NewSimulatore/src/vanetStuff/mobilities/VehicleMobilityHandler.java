@@ -6,7 +6,7 @@ import vanetStuff.entities.MobileNode;
 public class VehicleMobilityHandler implements MobilityHandler{
 
 	@Override
-	public <T extends MobileNode> void move(T mobileNode) {
+	public void move(MobileNode mobileNode) {
 		Vehicle v = (Vehicle)mobileNode;
 		/*debug*/
 		System.out.println("VehicleMobilityHandler.move():");

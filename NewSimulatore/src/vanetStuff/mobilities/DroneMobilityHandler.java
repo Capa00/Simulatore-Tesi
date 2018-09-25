@@ -5,6 +5,7 @@
  */
 package vanetStuff.mobilities;
 
+import vanetStuff.entities.Drone;
 import vanetStuff.entities.MobileNode;
 
 /**DroneMobilityHandler.java
@@ -18,7 +19,8 @@ public class DroneMobilityHandler implements MobilityHandler{
 	 * @see vanetStuff.mobilities.MobilityHandler#move(vanetStuff.entities.MobileNode)
 	 */
 	@Override
-	public <T extends MobileNode> void move(T mobileNode) {
+	public void move(MobileNode mobileNode) {
+		Drone d = (Drone)mobileNode;
 		/*debug*/
 		System.out.println("DroneMobilityHandler.move():");
 		System.out.println("\t");
