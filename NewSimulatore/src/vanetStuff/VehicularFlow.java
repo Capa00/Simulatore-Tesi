@@ -5,7 +5,7 @@ import simulator.EventHandler;
 import simulatorVanet.VanetSimulation;
 import vanetStuff.roadNetworks.Intersection;
 
-public class VehicularFlow extends Entity{
+public class VehicularFlow extends Entity<VanetSimulation>{
 	private String id;
 	private double tempoInizio, periodoGenerazioneVeicoli;
 	private Intersection nodoInizio, nodoFine;
@@ -31,7 +31,6 @@ public class VehicularFlow extends Entity{
 	public Intersection getTargetPoint() {return nodoFine;}
 	public int getVehicleNumber() {return numeroVeicoli;}
 	
-	
 	// OVERRIDES /////////////////////////////
 	
 	public String toString() {return "FLOW{"+id+"}";}
@@ -40,10 +39,6 @@ public class VehicularFlow extends Entity{
 	/* (non-Javadoc)
 	 * @see simulator.Entity#getEventHandler()
 	 */
-	@Override
-	public EventHandler<VehicularFlow> getEventHandler() {
-		return null;
-	}
 
 
 	

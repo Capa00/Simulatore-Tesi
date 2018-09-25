@@ -3,7 +3,7 @@
 //TODO
  *
  */
-package vanetStuff.events;
+package vanetStuff.events.handlers;
 
 /**EventManager.java
  * 

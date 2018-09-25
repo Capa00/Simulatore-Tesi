@@ -20,6 +20,7 @@ public class Scheduler {
 	private PriorityQueue<Event> queue = new PriorityQueue<>();
 	private LinkedList<Event> story = new LinkedList<>();
 	
+	private EventsManager eventManager = new EventsManager();
 	
 	// COSTR //////////////////////////////////////////
 	
@@ -80,7 +81,7 @@ public class Scheduler {
 		start = true;
 		Event event = null;
 		
-		if(realTime) {addEvent(new RealTime(stopTime));}
+		if(realTime) {addEvent(new RealTime());}
 		
 		while(start){
 			if(queue.size()>0){
@@ -90,10 +91,10 @@ public class Scheduler {
 				//refresh current time
 				currentTime = event.getTime();
 				
-				//action on the event
-				event.action();
+				//action of the event
+				eventManager.action(event);
 				
-				//stop simulation if time horizon is end
+				//stop simulation if time horizon is over
 				if(timeHorizon > 0 && currentTime>timeHorizon){
 					start = false;
 				}
@@ -105,19 +106,24 @@ public class Scheduler {
 	}
 	
 	private class RealTime extends Event {
-		private long stopTime;
-		public RealTime(long stopTime) {
-			super(realTimeEvent, 1);
-			this.stopTime = stopTime;
+		public RealTime() {
+			super(realTimeEvent, stopTime);
 		}
-
 		@Override
-		public void action() {
+		public EventHandler getEventHandler() {
+			return new RealTimeHandler();
+		}
+	}
+	
+	private class RealTimeHandler implements EventHandler {
+		@Override
+		public <T extends Event> void handle(T event) {
 			try {
 				Thread.sleep(stopTime);
-				addEvent(new RealTime(stopTime));
-			} catch (InterruptedException e) {e.printStackTrace();}
+				addEvent(event);
+			} catch (InterruptedException e) {e.printStackTrace();}			
 		}
+		
 	}
 	
 	

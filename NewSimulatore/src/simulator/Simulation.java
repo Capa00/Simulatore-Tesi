@@ -9,8 +9,7 @@ public abstract class Simulation <Param extends Parameter, Scen extends Scenario
 	protected Param parametri;
 	protected Scen scenario;
 	
-	protected EventManager eventManager = new EventManager();
-	
+
 	// COSTR //////////////////////////
 	
 	public Simulation(Param parametri, Scen scenario) {
@@ -25,13 +24,13 @@ public abstract class Simulation <Param extends Parameter, Scen extends Scenario
 		
 	}
 	
+	
 	// GETTER //////////////////////////
 	
 	public Scen getScenario() {return scenario;}
 	public Param getParameter() {return parametri;}
 	public Scheduler getScheduler() {return scheduler;}
 	
-	public EventManager getEventManager() {return eventManager;}
 	
 	// METHODS ////////////////////////
 	

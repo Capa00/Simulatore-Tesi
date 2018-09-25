@@ -1,13 +1,10 @@
 package vanetStuff.entities;
 
-import simulator.Event;
-import simulator.EventHandler;
 import simulatorVanet.VanetSimulation;
 import simulatorVanet.history.SpriteData;
 import simulatorVanet.history.SpriteData.SpriteDataCar;
 import util.RoadPath;
-import vanetStuff.events.EventName;
-import vanetStuff.mobilities.CarMobilityHandler;
+import vanetStuff.mobilities.VehicleMobilityHandler;
 import vanetStuff.mobilities.MobilityHandler;
 import vanetStuff.roadNetworks.Intersection;
 import vanetStuff.roadNetworks.Road;
@@ -45,11 +42,11 @@ public class Vehicle extends MobileNode {
 	public double		getCurrentPositionOnTheRoad() {return currentPositionOnRoad;}
 	public double		getRoadLength() {return roadLength;}
 	
-	@Override
-	public SpriteData getSpriteData() {
-		if(!onTheRoad)return null;
-		return new SpriteDataCar(currentRoad.getId(), currentPositionOnRoad/roadLength);
-	}
+//	@Override
+//	public SpriteData getSpriteData() {
+//		if(!onTheRoad)return null;
+//		return new SpriteDataCar(currentRoad.getId(), currentPositionOnRoad/roadLength);
+//	}
 
 	
 	// SETTERS ///////////////////////////
@@ -67,36 +64,6 @@ public class Vehicle extends MobileNode {
 	// OVERRIDES //////////////////////////
 	
 	@Override
-	public MobilityHandler getMobilityHandler() {return new CarMobilityHandler();}
-
-
-	/* (non-Javadoc)
-	 * @see simulator.Entity#getEventHandler()
-	 */
-	@Override
-	public EventHandler<Vehicle> getEventHandler() {
-		return new CarEventHandler();
-	}
-
-	private class CarEventHandler extends MobileNodeEventHandler<Vehicle> {
-		@Override
-		public void handle(Vehicle car, Event event) {
-			/*debug*/
-			System.out.println("Car.CarEventHandler.handle():");
-			System.out.println("\trichiamo l'handle del nodo Mobile");
-			/**/
-			
-			switch(event.getName()) {
-			case EventName.UPDATE_POSITION:
-				break;
-			
-			default : super.handle(car,event);
-			}
-			//gestisce updateposition
-		}
-	}
-
-
-
+	public MobilityHandler getMobilityHandler() {return new VehicleMobilityHandler();}
 
 }

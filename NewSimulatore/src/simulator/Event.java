@@ -17,7 +17,7 @@ public abstract class Event implements Comparable<Event>{
 	//////////////////////////////////////////////
 	
 	//azione da compiere dopo l'evento
-	public abstract void action();
+	public abstract EventHandler getEventHandler();
 	
 	//set shift time
 	public void setTime(double time_){time = time_;}
